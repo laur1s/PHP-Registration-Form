@@ -11,7 +11,7 @@ Form is using MySQL Prepared Statements and password encryption using SHA-256.
 
 1.Clone the Repository to your www directory
    ```
-   $ git clone https://github.com/laur1s/Registration-Template.git
+   $ git clone https://github.com/laur1s/PHP-Registration-Form.git
    ```
 2. Setup your MySQL database
 3. Create an users table according ```users.sql```
