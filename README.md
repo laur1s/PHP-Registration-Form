@@ -19,4 +19,4 @@ Form is using MySQL Prepared Statements and password encryption using SHA-256.
 
 ##Usage
 
-Feel free to modify the template according your needs
+Feel free to modify the template according your needs and push the code if you make any improvements!
