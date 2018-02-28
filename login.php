@@ -52,7 +52,7 @@ if (isset($_POST['btn-login'])) {
             <div class="col-md-12">
 
                 <div class="form-group">
-                    <h2 class="">Login:</h2>
+                    <h2 class="">LogiN:</h2>
                 </div>
 
                 <div class="form-group">
