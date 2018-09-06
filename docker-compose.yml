@@ -9,12 +9,13 @@ services:
       - 3306:3306
     volumes:
       - ./data/:/docker-entrypoint-initdb.d
+      - persistent:/var/lib/mysql
     networks:
       - default
-  
+
   www:
       build: .
-      ports: 
+      ports:
         - "8080:80"
       volumes:
         - ./html:/var/www/html/
@@ -22,5 +23,6 @@ services:
         - mysql
       networks:
         - default
-  
 
+volumes:
+    persistent:
