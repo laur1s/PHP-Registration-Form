@@ -1,4 +1,5 @@
 <?php
+ini_set('html_errors', true);
 ob_start();
 session_start();
 require_once 'dbconnect.php';
@@ -11,7 +12,7 @@ if (isset($_SESSION['user'])) {
 
 if (isset($_POST['btn-login'])) {
     $email = $_POST['email'];
-    $upass = $_POST['pass'];
+    $upass = $_POST['password'];
 
     $password = hash('sha256', $upass); // password hashing using SHA256
     $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email= ?");
@@ -33,83 +34,49 @@ if (isset($_POST['btn-login'])) {
     } else $errMSG = "User not found";
 }
 ?>
+<!doctype html>
+<html lang="en">
 
-<!DOCTYPE html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Login</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="../../../../favicon.ico">
+
+  <title>Signin Template for Bootstrap</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/css/signin.css" rel="stylesheet">
 </head>
-<body>
 
-<div class="container">
+<body class="text-center">
 
 
-    <div id="login-form">
-        <form method="post" autocomplete="off">
-
-            <div class="col-md-12">
-
-                <div class="form-group">
-                    <h2 class="">Login:</h2>
-                </div>
-
-                <div class="form-group">
-                    <hr/>
-                </div>
-
-                <?php
+  <form method="post" class="form-signin">
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <?php
                 if (isset($errMSG)) {
 
                     ?>
-                    <div class="form-group">
-                        <div class="alert alert-danger">
-                            <span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
+        
+                    <div class="alert alert-danger" role="alert">
+                           <?php echo $errMSG; ?>. Please check the details.
                         </div>
-                    </div>
                     <?php
                 }
                 ?>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                        <input type="email" name="email" class="form-control" placeholder="Email" required/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                        <input type="password" name="pass" class="form-control" placeholder="Password" required/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <hr/>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-block btn-primary" name="btn-login">Login</button>
-                </div>
-
-                <div class="form-group">
-                    <hr/>
-                </div>
-
-                <div class="form-group">
-                    <a href="register.php" type="button" class="btn btn-block btn-danger"
-                       name="btn-login">Register</a>
-                </div>
-
-            </div>
-
-        </form>
-    </div>
-
-</div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputPassword"  class="sr-only">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btn-login">Sign in</button>
+    <a href="register.php" class="btn btn-lg btn-secondary btn-block" role="button" aria-pressed="true">Register</a>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+  </form>
 </body>
+
 </html>
