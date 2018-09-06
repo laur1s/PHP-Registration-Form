@@ -2,7 +2,7 @@
 
 $db_host = "mysql";
 $db_name = "db";
-$db_user = "admin";
+$db_user = "root";
 $db_pass = "pass";
 
 
