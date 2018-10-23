@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/laur1s/PHP-Registration-Form.svg?style=svg)](https://circleci.com/gh/laur1s/PHP-Registration-Form)
+
 # Users Login and Registration Template
 
 This is a secure login & registration form using PHP, MySQL and jQuery using Bootstrap  3.
