@@ -5,9 +5,6 @@ jobs:
       - image: circleci/php
     steps:
       - checkout
-      - run:
-          name: Docker
-          command: echo Hello, world.
       - setup_remote_docker
       - run:
           name: Install Docker Compose
