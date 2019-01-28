@@ -7,11 +7,11 @@ if (isset($_SESSION['user']) != "") {
 }
 include_once 'dbconnect.php';
 
-if (isset($_POST['signup'])) {
+if (isset($_POST['btn-signup'])) {
 
     $uname = trim($_POST['uname']); // get posted data and remove whitespace
     $email = trim($_POST['email']);
-    $upass = trim($_POST['pass']);
+    $upass = trim($_POST['password']);
 
     // hash password with SHA256;
     $password = hash('sha256', $upass);
@@ -54,91 +54,50 @@ if (isset($_POST['signup'])) {
 
 }
 ?>
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Registration</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="../../../../favicon.ico">
+
+  <title>Signin Template for Bootstrap</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/css/signin.css" rel="stylesheet">
 </head>
-<body>
 
-<div class="container">
+<body class="text-center">
 
-    <div id="login-form">
-        <form method="post" autocomplete="off">
 
-            <div class="col-md-12">
-
-                <div class="form-group">
-                    <h2 class="">Register for our Website</h2>
-                </div>
-
-                <div class="form-group">
-                    <hr/>
-                </div>
-
-                <?php
+  <form method="post" class="form-signin">
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please register here</h1>
+    <?php
                 if (isset($errMSG)) {
 
                     ?>
-                    <div class="form-group">
-                        <div class="alert alert-<?php echo ($errTyp == "success") ? "success" : $errTyp; ?>">
-                            <span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
+                    <div class="alert alert-<?php echo ($errTyp == "success") ? "success" : $errTyp; ?>" role="alert">
+                           <?php echo $errMSG; ?>. Please check the details.
                         </div>
-                    </div>
                     <?php
                 }
                 ?>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                        <input type="text" name="uname" class="form-control" placeholder="Enter Username" required/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                        <input type="email" name="email" class="form-control" placeholder="Enter Email" required/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                        <input type="password" name="pass" class="form-control" placeholder="Enter Password"
-                               required/>
-                    </div>
-                </div>
-
-                <div class="checkbox">
-                    <label><input type="checkbox" id="TOS" value="This"><a href="#">I agree with
-                            terms of service</a></label>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn    btn-block btn-primary" name="signup" id="reg">Register</button>
-                </div>
-
-                <div class="form-group">
-                    <hr/>
-                </div>
-
-                <div class="form-group">
-                    <a href="login.php" type="button" class="btn btn-block btn-success" name="btn-login">Login</a>
-                </div>
-
-            </div>
-
-        </form>
-    </div>
-
-</div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="assets/js/tos.js"></script>
-
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="username" name ="uname" class="sr-only">UserName</label>
+    <input type="text" class="form-control" id="usr" placeholder="Name">
+    <label for="inputPassword"  class="sr-only">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btn-signup">Sign in</button>
+    <a href="register.php" class="btn btn-lg btn-secondary btn-block" role="button" aria-pressed="true">Register</a>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+  </form>
 </body>
+
 </html>
