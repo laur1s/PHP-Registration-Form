@@ -21,5 +21,5 @@ jobs:
             sudo chown $USER:$USER -R .
             set -x
             docker-compose up -d
-            docker run --network container:contacts \
+            docker run --network container:www \
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080
