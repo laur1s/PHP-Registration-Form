@@ -2,12 +2,25 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: circleci/php
     steps:
       - checkout
       - run:
-          name: Greeting
+          name: Docker
           command: echo Hello, world.
+      - setup_remote_docker
       - run:
-          name: Print the Current Time
-          command: date
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run:
+          name: Start container and verify it is working
+          command: |
+            sudo chown $USER:$USER -R .
+            set -x
+            docker-compose up -d
+            docker ps
+            docker run --network container:project_www_1 \
+              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080
