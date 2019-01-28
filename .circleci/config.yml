@@ -17,6 +17,7 @@ jobs:
       - run:
           name: Start container and verify it is working
           command: |
+            sudo chown $USER:$USER -R .
             set -x
             docker-compose up -d
             docker run --network container:contacts \
