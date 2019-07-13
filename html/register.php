@@ -18,7 +18,11 @@ if (isset($_POST['signup'])) {
 
     // check email exist or not
     $stmt = $conn->prepare("SELECT email FROM users WHERE email=?");
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("s", $email);  // is wrong 
+//     Fatal error: Uncaught Error: Call to a member function bind_param() on boolean in 
+//     C:\xampp\htdocs\registerwebpage\html\register.php:21 Stack trace: #0 {main} thrown 
+//     in C:\xampp\htdocs\registerwebpage\html\register.php on line 21
+    
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
