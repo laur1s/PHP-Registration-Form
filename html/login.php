@@ -10,8 +10,10 @@ if (isset($_SESSION['user'])) {
 }
 
 if (isset($_POST['btn-login'])) {
-    $email = $_POST['email'];
-    $upass = $_POST['pass'];
+    
+    //improved security using mysqli_real_escape_string and fetch form data
+    $email = mysqli_real_escape_string($conn,$_POST['email']);
+    $upass = mysqli_real_escape_string($conn,$_POST['pass']);
 
     $password = hash('sha256', $upass); // password hashing using SHA256
     $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email= ?");
