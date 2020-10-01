@@ -1,12 +1,6 @@
 <?php
-
-$db_host = "mysql";
-$db_name = "db";
-$db_user = "root";
-$db_pass = "pass";
-
-
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+//database authentication anmd connection
+$conn = new mysqli('mysql', 'root', 'pass', 'db');
 
 // Check connection
 if ($conn->connect_error) {
