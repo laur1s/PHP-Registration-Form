@@ -8,9 +8,9 @@ if (isset($_SESSION['user']) != "") {
 include_once 'dbconnect.php';
 
 if (isset($_POST['signup'])) {
-
-    $uname = trim($_POST['uname']); // get posted data and remove whitespace
-    $email = trim($_POST['email']);
+                      
+    $uname = htmlspecialchars(trim($_POST['uname']),ENT_QUOTES); // get posted data and remove whitespace
+    $email = htmlspecialchars(trim($_POST['email']),ENT_QUOTES);
     $upass = trim($_POST['pass']);
 
     // hash password with SHA256;
