@@ -14,7 +14,7 @@ if (isset($_POST['btn-login'])) {
     $upass = $_POST['pass'];
 
     $password = hash('sha256', $upass); // password hashing using SHA256
-    $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE email= ?");
+    $stmt = $conn->prepare("SELECT id, first_name, sir_name, password FROM users WHERE email= ?");
     $stmt->bind_param("s", $email);
     /* execute query */
     $stmt->execute();
@@ -52,7 +52,7 @@ if (isset($_POST['btn-login'])) {
             <div class="col-md-12">
 
                 <div class="form-group">
-                    <h2 class="">Login:</h2>
+                    <h2 class="">Please login Login:</h2>
                 </div>
 
                 <div class="form-group">

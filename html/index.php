@@ -10,7 +10,6 @@ if (!isset($_SESSION['user'])) {
 // select logged in users detail
 $res = $conn->query("SELECT * FROM users WHERE id=" . $_SESSION['user']);
 $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
-
 ?>
 <!DOCTYPE html>
 <head>
@@ -36,8 +35,8 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">First Link</a></li>
-                <li><a href="#">Second Link</a></li>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="users.php">Users</a></li>
                 <li><a href="#">Third Link</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -65,7 +64,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
 <div class="container">
     <!-- Jumbotron-->
     <div class="jumbotron">
-        <h1>Hello, <?php echo $userRow['username']; ?></h1>
+        <h1>Hello, <?php echo $userRow['first_name']." ".$userRow['sir_name']; ?></h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at auctor est, in convallis eros. Nulla
             facilisi. Donec ipsum nulla, hendrerit nec mauris vitae, lobortis egestas tortor. </p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>

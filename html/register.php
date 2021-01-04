@@ -9,8 +9,12 @@ include_once 'dbconnect.php';
 
 if (isset($_POST['signup'])) {
 
-    $uname = trim($_POST['uname']); // get posted data and remove whitespace
+    $title = trim($_POST['title']);
+    $first_name = trim($_POST['first_name']); // get posted data and remove whitespace
+    $sir_name = trim($_POST['sir_name']);
     $email = trim($_POST['email']);
+    $country = trim($_POST['country']);
+    $city = trim($_POST['city']);
     $upass = trim($_POST['pass']);
 
     // hash password with SHA256;
@@ -28,8 +32,8 @@ if (isset($_POST['signup'])) {
     if ($count == 0) { // if email is not found add user
 
 
-        $stmts = $conn->prepare("INSERT INTO users(username,email,password) VALUES(?, ?, ?)");
-        $stmts->bind_param("sss", $uname, $email, $password);
+        $stmts = $conn->prepare("INSERT INTO users(is_admin, title, first_name, sir_name, email, country, city, password) VALUES(false, ?, ?, ?, ?, ?, ?, ?)");
+        $stmts->bind_param("sssssss", $title, $first_name, $sir_name, $email, $country, $city, $password);
         $res = $stmts->execute();//get result
         $stmts->close();
 
@@ -93,8 +97,23 @@ if (isset($_POST['signup'])) {
 
                 <div class="form-group">
                     <div class="input-group">
+                        <span>  Set Title: &nbsp; </span> 
+                        <label class="radio-inline"><input type="radio" name="title" value="Mr." checked>Mr.</label>
+                        <label class="radio-inline"><input type="radio" name="title" value="Mrs.">Mrs.</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                        <input type="text" name="uname" class="form-control" placeholder="Enter Username" required/>
+                        <input type="text" name="first_name" class="form-control" placeholder="Enter First Name" required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                        <input type="text" name="sir_name" class="form-control" placeholder="Enter Sir Name" required/>
                     </div>
                 </div>
 
@@ -105,11 +124,26 @@ if (isset($_POST['signup'])) {
                     </div>
                 </div>
 
+                
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                         <input type="password" name="pass" class="form-control" placeholder="Enter Password"
                                required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                        <input type="text" name="country" class="form-control" placeholder="Enter Country" required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                        <input type="text" name="city" class="form-control" placeholder="Enter City" required/>
                     </div>
                 </div>
 
