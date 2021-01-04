@@ -9,7 +9,7 @@ services:
       - 3306:3306
     volumes:
       - ./data/:/docker-entrypoint-initdb.d
-      - persistent:/var/lib/mysql
+      - ./DB/:/var/lib/mysql:rw
     networks:
       - default
 
@@ -23,6 +23,3 @@ services:
         - mysql
       networks:
         - default
-
-volumes:
-    persistent:
