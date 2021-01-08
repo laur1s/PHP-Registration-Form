@@ -51,6 +51,8 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                     <ul class="dropdown-menu">
                         <li><a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a>
                         </li>
+                        <li><a href="user_profile.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Profile</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
