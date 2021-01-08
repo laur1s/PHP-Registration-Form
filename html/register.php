@@ -75,7 +75,7 @@ if (isset($_POST['signup'])) {
             <div class="col-md-12">
 
                 <div class="form-group">
-                    <h2 class="">Register for our Website</h2>
+                    <h2 class="">Register for our School of Automation</h2>
                 </div>
 
                 <div class="form-group">

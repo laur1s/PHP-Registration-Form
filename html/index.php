@@ -31,7 +31,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Website Name</a>
+            <a class="navbar-brand" href="#">Endava SoA SUT</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -58,13 +58,10 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
     </div>
 </nav>
 
-
-
-
 <div class="container">
     <!-- Jumbotron-->
     <div class="jumbotron">
-        <h1>Hello, <?php echo $userRow['first_name']." ".$userRow['sir_name']; ?></h1>
+        <h1>Hello, <?php echo $userRow['title'] . " " . $userRow['first_name']." ".$userRow['sir_name']; ?></h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at auctor est, in convallis eros. Nulla
             facilisi. Donec ipsum nulla, hendrerit nec mauris vitae, lobortis egestas tortor. </p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
@@ -72,7 +69,7 @@ $userRow = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
     <div class="row">
         <div class="col-lg-12">
-            <h2>Example body text</h2>
+            <h2>Just any text</h2>
             <p>Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et
                 magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
             <p>
