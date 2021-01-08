@@ -14,7 +14,7 @@ services:
       - default
 
   www:
-      build: .
+      build: www/ .
       ports:
         - "8080:80"
       volumes:
@@ -23,3 +23,15 @@ services:
         - mysql
       networks:
         - default
+
+  rest:
+      build: rest/ .
+      ports:
+        - "8081:8081"
+      volumes:
+        - ./api:/usr/src/app
+      links:
+        - mysql
+      networks:
+        - default
+      entrypoint: [ "bash", "python3 ./app.py "]      
