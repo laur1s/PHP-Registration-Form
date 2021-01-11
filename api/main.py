@@ -38,6 +38,7 @@ def add_user():
 
 @app.route('/users', methods=['GET'])
 def list_users():
+    print("Retrieving users")
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
@@ -130,4 +131,7 @@ def not_found(error=None):
 
 
 if __name__ == "__main__":
-    app.run()
+    print("Starting application")
+    app.run(host='0.0.0.0')
+    print("application is started")
+    
