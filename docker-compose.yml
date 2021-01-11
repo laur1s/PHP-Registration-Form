@@ -27,9 +27,7 @@ services:
   rest:
       build: api/ .
       ports:
-        - "8081:8081"
-      volumes:
-        - ./api:/usr/src/app
+        - "5000:5000"
       links:
         - mysql
       networks:

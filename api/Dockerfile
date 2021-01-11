@@ -15,6 +15,4 @@ RUN pip install -r requirements.txt
 #Expose the required port
 EXPOSE 5000
 
-ENTRYPOINT [ "python3" ]
-
-CMD python app.py
+CMD python main.py
