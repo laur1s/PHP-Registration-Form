@@ -6,23 +6,27 @@ from flask import flash, request
 
 
 @app.route('/users', methods=['POST'])
-def add_emp():
+def add_user():
     try:
         _json = request.json
-        _name = _json['name']
+        _firstName = _json['firstName']
+        _surName = _json['surName']
+        _title = _json['title']
+        _country = _json['country']
+        _city = _json['city']
         _email = _json['email']
-        _phone = _json['phone']
-        _address = _json['address']
-        if _name and _email and _phone and _address and request.method == 'POST':
-            sqlQuery = "INSERT INTO users(name, email, phone, address) VALUES(%s, %s, %s, %s, %s)"
-            bindData = (_name, _email, _phone, _address)
+        _password = _json['password']
+
+        if _firstName and _surName and _title and _country and _city and _email and _password and request.method == 'POST':
+            sqlQuery = "INSERT INTO users(first_name, sir_name, title, country, city, email, password) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+            bindData = (_firstName, _surName, _title, _country, _city, _email, _password)
             conn = mysql.connect()
             cursor = conn.cursor()
             cursor.execute(sqlQuery, bindData)
             conn.commit()
-            respone = jsonify('Employee added successfully!')
-            respone.status_code = 200
-            return respone
+            response = jsonify('User added successfully!')
+            response.status_code = 200
+            return response
         else:
             return not_found()
     except Exception as e:
@@ -32,14 +36,14 @@ def add_emp():
         conn.close()
 
 
-@app.route('/users')
-def list_emp():
+@app.route('/users', methods=['GET'])
+def list_users():
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute("SELECT * FROM users")
-        empRows = cursor.fetchall()
-        respone = jsonify(empRows)
+        usersRows = cursor.fetchall()
+        respone = jsonify(usersRows)
         respone.status_code = 200
         return respone
     except Exception as e:
@@ -49,16 +53,16 @@ def list_emp():
         conn.close()
 
 
-@app.route('/users/<int:id>')
-def get_emp(id):
+@app.route('/users/<int:id>', methods=['GET'])
+def get_user(id):
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute("SELECT * FROM users WHERE id =%s limit 1", id)
         empRow = cursor.fetchone()
-        respone = jsonify(empRow)
-        respone.status_code = 200
-        return respone
+        response = jsonify(empRow)
+        response.status_code = 200
+        return response
     except Exception as e:
         print(e)
     finally:
@@ -67,25 +71,27 @@ def get_emp(id):
 
 
 @app.route('/users', methods=['PUT'])
-def update_emp():
+def update_user():
     try:
         _json = request.json
+        _firstName = _json['firstName']
+        _surName = _json['surName']
+        _title = _json['title']
+        _country = _json['country']
+        _city = _json['city']
         _id = _json['id']
-        _name = _json['name']
-        _email = _json['email']
-        _phone = _json['phone']
-        _address = _json['address']
+
         # validate the received values
-        if _name and _email and _phone and _address and _id and request.method == 'PUT':
-            sqlQuery = "UPDATE users SET name=%s, email=%s, phone=%s, address=%s WHERE id=%s"
-            bindData = (_name, _email, _phone, _address, _id,)
+        if _firstName and _surName and _title and _country and _city and _id and request.method == 'PUT':
+            sqlQuery = "UPDATE users SET first_name=%s, sir_name=%s, title=%s, country=%s, city=%s WHERE id=%s"
+            bindData = (_firstName, _surName, _title, _country, _city, _id)
             conn = mysql.connect()
             cursor = conn.cursor()
             cursor.execute(sqlQuery, bindData)
             conn.commit()
-            respone = jsonify('User updated successfully!')
-            respone.status_code = 200
-            return respone
+            response = jsonify('User updated successfully!')
+            response.status_code = 200
+            return response
         else:
             return not_found()
     except Exception as e:
@@ -96,15 +102,15 @@ def update_emp():
 
 
 @app.route('/users/<int:id>', methods=['DELETE'])
-def delete_emp(id):
+def delete_user(id):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM users WHERE id =%s", (id,))
+        cursor.execute("DELETE FROM users WHERE id =%s", id)
         conn.commit()
-        respone = jsonify('User deleted successfully!')
-        respone.status_code = 200
-        return respone
+        response = jsonify('User deleted successfully!')
+        response.status_code = 200
+        return response
     except Exception as e:
         print(e)
     finally:
@@ -118,9 +124,9 @@ def not_found(error=None):
         'status': 404,
         'message': 'Record not found: ' + request.url,
     }
-    respone = jsonify(message)
-    respone.status_code = 404
-    return respone
+    response = jsonify(message)
+    response.status_code = 404
+    return response
 
 
 if __name__ == "__main__":

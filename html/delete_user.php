@@ -21,7 +21,7 @@ if (!$userRow['is_admin']) {
     $stmts = $conn->prepare("DELETE FROM users WHERE id = ?");
     $stmts->bind_param("s", $id);
     $res = $stmts->execute();//get result
-    echo "window.alert('Deletein result = {$res}')";
+    echo "window.alert('Delete in result = {$res}')";
     $stmts->close();
     header("Location: users.php"); 
 }
