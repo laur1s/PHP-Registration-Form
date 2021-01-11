@@ -1,5 +1,5 @@
 Flask
+Flask_cors
 Flask-MySql
 PyMySQL
-Flask-cors
 mysql-connector
