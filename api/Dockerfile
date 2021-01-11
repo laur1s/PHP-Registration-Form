@@ -6,10 +6,13 @@ WORKDIR /usr/src/app
 
 #Install the dependencies
 RUN apt-get -y update
-RUN pip3 install -r Flask
+RUN pip3 install Flask
+
+COPY . /usr/src/app
 
 #Expose the required port
-EXPOSE 8081
+EXPOSE 5000
 
-#Run the command
-# CMD ["python3", "./api/app.py"]
+ENTRYPOINT [ "python3" ]
+
+CMD [ "main.py" ]

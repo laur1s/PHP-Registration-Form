@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import flash, request
 
 
-@app.route('/add', methods=['POST'])
+@app.route('/emp', methods=['POST'])
 def add_emp():
     try:
         _json = request.json
@@ -14,7 +14,7 @@ def add_emp():
         _phone = _json['phone']
         _address = _json['address']
         if _name and _email and _phone and _address and request.method == 'POST':
-            sqlQuery = "INSERT INTO rest_emp(name, email, phone, address) VALUES(%s, %s, %s, %s, %s)"
+            sqlQuery = "INSERT INTO users(name, email, phone, address) VALUES(%s, %s, %s, %s, %s)"
             bindData = (_name, _email, _phone, _address)
             conn = mysql.connect()
             cursor = conn.cursor()
@@ -33,11 +33,11 @@ def add_emp():
 
 
 @app.route('/emp')
-def emp():
+def list_emp():
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT id, name, email, phone, address FROM rest_emp")
+        cursor.execute("SELECT * FROM users")
         empRows = cursor.fetchall()
         respone = jsonify(empRows)
         respone.status_code = 200
@@ -50,11 +50,11 @@ def emp():
 
 
 @app.route('/emp/<int:id>')
-def emp(id):
+def get_emp(id):
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT id, name, email, phone, address FROM rest_emp WHERE id =%s", id)
+        cursor.execute("SELECT * FROM users WHERE id =%s limit 1", id)
         empRow = cursor.fetchone()
         respone = jsonify(empRow)
         respone.status_code = 200
@@ -66,7 +66,7 @@ def emp(id):
         conn.close()
 
 
-@app.route('/update', methods=['PUT'])
+@app.route('/emp', methods=['PUT'])
 def update_emp():
     try:
         _json = request.json
@@ -77,7 +77,7 @@ def update_emp():
         _address = _json['address']
         # validate the received values
         if _name and _email and _phone and _address and _id and request.method == 'PUT':
-            sqlQuery = "UPDATE rest_emp SET name=%s, email=%s, phone=%s, address=%s WHERE id=%s"
+            sqlQuery = "UPDATE users SET name=%s, email=%s, phone=%s, address=%s WHERE id=%s"
             bindData = (_name, _email, _phone, _address, _id,)
             conn = mysql.connect()
             cursor = conn.cursor()
@@ -95,14 +95,14 @@ def update_emp():
         conn.close()
 
 
-@app.route('/delete/<int:id>', methods=['DELETE'])
+@app.route('/emp/<int:id>', methods=['DELETE'])
 def delete_emp(id):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM rest_emp WHERE id =%s", (id,))
+        cursor.execute("DELETE FROM users WHERE id =%s", (id,))
         conn.commit()
-        respone = jsonify('Employee deleted successfully!')
+        respone = jsonify('User deleted successfully!')
         respone.status_code = 200
         return respone
     except Exception as e:
