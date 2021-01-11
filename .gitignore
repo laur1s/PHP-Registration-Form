@@ -3,3 +3,4 @@
 !DB/
 DB/*
 .vscode/settings.json
+api/__pycache__/*

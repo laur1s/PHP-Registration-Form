@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import flash, request
 
 
-@app.route('/emp', methods=['POST'])
+@app.route('/users', methods=['POST'])
 def add_emp():
     try:
         _json = request.json
@@ -32,7 +32,7 @@ def add_emp():
         conn.close()
 
 
-@app.route('/emp')
+@app.route('/users')
 def list_emp():
     try:
         conn = mysql.connect()
@@ -49,7 +49,7 @@ def list_emp():
         conn.close()
 
 
-@app.route('/emp/<int:id>')
+@app.route('/users/<int:id>')
 def get_emp(id):
     try:
         conn = mysql.connect()
@@ -66,7 +66,7 @@ def get_emp(id):
         conn.close()
 
 
-@app.route('/emp', methods=['PUT'])
+@app.route('/users', methods=['PUT'])
 def update_emp():
     try:
         _json = request.json
@@ -83,7 +83,7 @@ def update_emp():
             cursor = conn.cursor()
             cursor.execute(sqlQuery, bindData)
             conn.commit()
-            respone = jsonify('Employee updated successfully!')
+            respone = jsonify('User updated successfully!')
             respone.status_code = 200
             return respone
         else:
@@ -95,7 +95,7 @@ def update_emp():
         conn.close()
 
 
-@app.route('/emp/<int:id>', methods=['DELETE'])
+@app.route('/users/<int:id>', methods=['DELETE'])
 def delete_emp(id):
     try:
         conn = mysql.connect()
